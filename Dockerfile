@@ -27,8 +27,5 @@ RUN npm ci --omit=dev
 # Copy built files from builder
 COPY --from=builder /build/dist ./dist
 
-# Expose port
-EXPOSE 3000
-
 # Run app
 CMD ["node", "dist/index.js"]

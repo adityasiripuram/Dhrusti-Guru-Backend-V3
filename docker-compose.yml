@@ -5,17 +5,17 @@ services:
     build: .
     container_name: dhrusti_guru_backend
     restart: always
-    ports:
-      - "3000:3000"
     env_file:
-      - .env
+      - .env.docker
+    ports:
+      - "5000:5000"
     depends_on:
       postgres:
         condition: service_healthy
     volumes:
       - .:/app
       - /app/node_modules
-    command: npm run dev
+    command: npm run start
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
       interval: 10s
