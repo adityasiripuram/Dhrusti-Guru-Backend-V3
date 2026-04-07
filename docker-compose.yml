@@ -12,9 +12,9 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    volumes:
-      - .:/app
-      - /app/node_modules
+    # volumes:
+    #   - .:/app
+    #   - /app/node_modules
     command: npm run start
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/health"]

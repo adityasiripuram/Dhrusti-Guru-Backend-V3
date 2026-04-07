@@ -1,4 +1,7 @@
-/.env
-/.env.docker
+# env files (important!)
+.env
+.env.*
+!.env.example
+
 /dist
 /node_modules
