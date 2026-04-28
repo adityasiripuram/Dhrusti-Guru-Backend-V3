@@ -8,7 +8,7 @@ export async function checkIn(teacherId: string, checkInTime: Date = new Date())
 
   const teacher = await teacherRepo.findOneOrFail({ where: { id: teacherId } });
   const date = new Date().toISOString().slice(0, 10);
-  let record = await attendanceRepo.findOne({ where: { teacher, date } });
+  let record = await attendanceRepo.findOne({ where: { teacher: { id: teacherId }, date } });
 
   if (!record) {
     record = attendanceRepo.create({ teacher, date, checkInTime, status: AttendanceStatus.Present });
@@ -25,10 +25,12 @@ export async function checkOut(teacherId: string, checkOutTime: Date = new Date(
 
   const teacher = await teacherRepo.findOneOrFail({ where: { id: teacherId } });
   const date = new Date().toISOString().slice(0, 10);
-  const record = await attendanceRepo.findOne({ where: { teacher, date } });
+  const record = await attendanceRepo.findOne({ where: { teacher: { id: teacherId }, date } });
 
   if (!record) {
-    throw new Error('No check-in record found for today');
+    const error = new Error('No check-in record found for today') as Error & { status: number };
+    error.status = 400;
+    throw error;
   }
 
   record.checkOutTime = checkOutTime;
