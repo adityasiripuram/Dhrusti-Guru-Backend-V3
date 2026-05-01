@@ -2,3 +2,5 @@
 /.env.docker
 /dist
 /node_modules
+.env.example
+.env.example
