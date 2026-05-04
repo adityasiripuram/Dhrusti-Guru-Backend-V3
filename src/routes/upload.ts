@@ -3,13 +3,13 @@ import {
   getErrorMessage,
   parseCompressionOverrides,
   processAndUpload,
-} from "../services/uploadService.js";
+} from "../services/uploadService";
 import {
   handleMulterError,
   uploadMultiple,
   uploadSingle,
-} from "../middleware/upload.js";
-import { getProvider } from "../storage/provider.js";
+} from "../middleware/upload";
+import { getProvider } from "../storage/provider";
 
 const router = express.Router();
 
